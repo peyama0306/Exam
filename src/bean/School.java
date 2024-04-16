@@ -1,6 +1,8 @@
 package bean;
 
-public class School implements Seriallizable {
+import java.io.Serializable;
+
+public class School implements Serializable {
 	private String cd;
 	private String name;
 	public String getCd() {
