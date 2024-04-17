@@ -18,6 +18,12 @@ public class FrontController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 			doGet(req,res);
+}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet1(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		try{
 
 			String path = req.getServletPath().substring(1);
@@ -34,12 +40,12 @@ public class FrontController extends HttpServlet{
 			e.printStackTrace();
 			req.getRequestDispatcher("/error.jsp").forward(req,res);
 	}
-}
-
+		res.getWriter().append("Served at:").append(req.getContextPath());
+	}
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet1(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stud
 		doGet(request,response);
 	}

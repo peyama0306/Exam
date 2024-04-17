@@ -24,7 +24,7 @@ public class Student implements Serializable {
 	public int getEntYear() {
 		return entYear;
 	}
-	public void setEntyear(int entYear) {
+	public void setEntYear(int entYear) {
 		this.entYear = entYear;
 	}
 	public String getClassNum() {

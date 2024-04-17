@@ -4,43 +4,40 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.School;
 
-public class SchoolDao extends Dao {
+public class ClassNumDao extends Dao {
 	/**
-	 * getメソッド 学校コードを指定して学校インスタンスを１件取得する
+	 * filterメソッド 学校を指定してクラス番号の一覧を取得する
 	 *
-	 * @param cd:String
-	 *            学校コード
-	 * @return 学校クラスのインスタンス 存在しない場合はnull
+	 * @param school:School
+	 * @return クラス番号の一覧:List<String>
 	 * @throws Exception
 	 */
-	public School get(String cd) throws Exception {
-		// 学校インスタンスを初期化
-		School school = new School();
-		// データベースへのコネクションを確率
+	public List<String> filter(School school) throws Exception {
+		// リストを初期化
+		List<String> list = new ArrayList<>();
+		// データベースへのコネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 
 		try {
 			// プリペアードステートメントにSQL文をセット
-			statement = connection.prepareStatement("select * from school where cd=?");
+			statement = connection
+					.prepareStatement("select class_num from class_num where school_cd=? order by class_num");
 			// プリペアードステートメントに学校コードをバインド
-			statement.setString(1, cd);
+			statement.setString(1, school.getCd());
 			// プリペアードステートメントを実行
 			ResultSet rSet = statement.executeQuery();
 
-			if (rSet.next()) {
-				// リザルトセットが存在する場合
-				// 学校インスタンスに学校コードと学校名をセット
-				school.setCd(rSet.getString("cd"));
-				school.setName(rSet.getString("name"));
-			} else {
-				// 存在しない場合
-				// 学校インスタンスにnullをセット
-				school = null;
+			// リザルトセットを全件走査
+			while (rSet.next()) {
+				// リストにクラス番号を追加
+				list.add(rSet.getString("class_num"));
 			}
 		} catch (Exception e) {
 			throw e;
@@ -62,6 +59,8 @@ public class SchoolDao extends Dao {
 				}
 			}
 		}
-		return school;
+
+		return list;
 	}
+
 }
