@@ -26,7 +26,7 @@ public class StudentListAction extends Action {
 
 		//Teacher teacher = (Teacher)session.getAttribute("user");
 		School school = new School();
-		school.setCd("tes");
+		school.setCd("oom");
 		school.setName("テスト校");
 
 		Teacher teacher = new Teacher();

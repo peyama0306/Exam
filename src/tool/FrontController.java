@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *Srvlet implementation class FrontController
  */
@@ -16,19 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet{
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-			doGet(req,res);
-}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet1(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		try{
 
 			String path = req.getServletPath().substring(1);
 
-			String name = path.replace("a", "A").replace('/', '.');
+			String name = path.replace(".a", "A").replace('/', '.');
 
 			System.out.println("★ servlet path ->" + req.getServletPath());
 			System.out.println("★ class name ->" + name);
@@ -40,13 +35,13 @@ public class FrontController extends HttpServlet{
 			e.printStackTrace();
 			req.getRequestDispatcher("/error.jsp").forward(req,res);
 	}
-		res.getWriter().append("Served at:").append(req.getContextPath());
+		//res.getWriter().append("Served at:").append(req.getContextPath());
 	}
 	/**
 	 * @see HttpServlet#doGet1(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stud
-		doGet(request,response);
+		doGet(req, res);
 	}
 }
